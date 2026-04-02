@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>HIVE Club – Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .select-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+      gap: 20px;
+    }
+    .select-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .select-header h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #60a5fa, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .select-header p {
+      color: rgba(255,255,255,0.55);
+      font-size: 1rem;
+    }
+    .select-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 700px;
+    }
+    .select-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 36px 28px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      display: block;
+    }
+    .select-card:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .select-card .icon { font-size: 52px; margin-bottom: 16px; }
+    .select-card h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: white;
+      margin: 0 0 8px;
+    }
+    .select-card p {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    .btn-logout {
+      margin-top: 16px;
+      padding: 12px 28px;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-logout:hover { background: rgba(255,255,255,0.12); }
+    @media (max-width: 480px) {
+      .select-header h1 { font-size: 1.8rem; }
+      .select-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="select-wrapper">
+    <div class="select-header">
+      <div style="font-size:48px; margin-bottom:12px;">🐝</div>
+      <h1>HIVE Club</h1>
+      <p>Select your dashboard</p>
+    </div>
+
+    <div class="select-grid">
+      <a href="loyalty-admin.html" class="select-card">
+        <div class="icon">🏆</div>
+        <h2>Loyalty Admin</h2>
+        <p>Manage players, points &amp; coupons</p>
+      </a>
+      <a href="dashboard.html" class="select-card">
+        <div class="icon">📊</div>
+        <h2>Dashboard</h2>
+        <p>Bookings &amp; analytics overview</p>
+      </a>
+    </div>
+
+    <button class="btn-logout" onclick="logout()">🚪 Log Out</button>
+  </div>
+
+  <script>
+    const SESSION_TIMEOUT = 8 * 60 * 60 * 1000;
+
+    window.addEventListener("load", function () {
+      const token = sessionStorage.getItem("adminToken");
+      if (!token || !isTokenValid(token)) {
+        window.location.href = "index.html";
+      }
+    });
+
+    function logout() {
+      sessionStorage.removeItem("adminToken");
+      window.location.href = "index.html";
+    }
+
+    function isTokenValid(token) {
+      try {
+        const data = atob(token);
+        const parts = data.split(":");
+        const timestamp = parseInt(parts[1]);
+        return (Date.now() - timestamp) < SESSION_TIMEOUT;
+      } catch (e) {
+        return false;
+      }
+    }
+  </script>
+</body>
+</html>

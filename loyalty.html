@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>HIVE Loyalty</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="loyalty-header">
+  <div class="loyalty-header-inner">
+    <div class="loyalty-header-brand">
+      <span>🐝</span>
+      <h1>HIVE Loyalty</h1>
+    </div>
+    <button class="btn-admin-login" onclick="window.location.href='index.html'">Staff Login</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- Search -->
+  <section class="search-section">
+    <div class="search-box">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search your name…">
+      <button class="search-btn" onclick="searchPlayer()">Search</button>
+    </div>
+  </section>
+
+  <!-- Player Card (hidden until searched) -->
+  <section id="playerSection" style="display:none;">
+    <div class="player-card">
+      <!-- Avatar -->
+      <div class="avatar-container" id="avatarContainer">
+        <svg class="progress-ring-svg" id="progressRing" viewBox="0 0 140 140">
+          <circle class="progress-ring-bg" cx="70" cy="70" r="60" />
+          <circle class="progress-ring-fill" id="progressCircle" cx="70" cy="70" r="60"
+            stroke-dasharray="377" stroke-dashoffset="377" />
+        </svg>
+        <div class="avatar-inner" id="avatarInner">
+          <div class="avatar-placeholder" id="avatarPlaceholder">?</div>
+          <img id="avatarImg" class="avatar-img" alt="Avatar" style="display:none;">
+        </div>
+        <label class="camera-btn" for="avatarUpload" title="Upload photo">📷</label>
+        <input type="file" id="avatarUpload" accept="image/*" style="display:none;" onchange="handleAvatarUpload(event)">
+      </div>
+
+      <h2 class="player-name" id="playerName">–</h2>
+      <p class="player-points" id="playerPoints">0 pts</p>
+      <p class="player-level" id="playerLevel">Bronze</p>
+
+      <!-- Progress bar -->
+      <div class="progress-bar-wrap">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <p class="progress-label" id="progressLabel"></p>
+
+      <!-- Redeem Coupon -->
+      <div class="redeem-section">
+        <h3 class="sub-title">🎁 Claim a Reward</h3>
+        <div class="rewards-grid" id="rewardsGrid">
+          <div class="loading-text">Loading rewards…</div>
+        </div>
+      </div>
+
+      <!-- My Coupons -->
+      <div class="my-coupons-section">
+        <h3 class="sub-title">🎫 My Coupons</h3>
+        <div id="myCoupons">
+          <div class="loading-text">Loading…</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leaderboard -->
+  <section class="section-card" id="leaderboardSection">
+    <h2 class="section-title">🏆 Leaderboard</h2>
+    <div id="leaderboardList">
+      <div class="loading-text">Loading…</div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Claim Modal -->
+<div class="modal-overlay" id="claimModal" style="display:none;" onclick="closeClaimModal(event)">
+  <div class="modal-content">
+    <h3 id="claimModalTitle">Claim Reward</h3>
+    <p id="claimModalDesc"></p>
+    <p id="claimModalCost"></p>
+    <div class="modal-btns">
+      <button class="btn-confirm" id="claimConfirmBtn">Confirm Claim</button>
+      <button class="btn-cancel" onclick="document.getElementById('claimModal').style.display='none'">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script type="module" src="loyalty.js"></script>
+</body>
+</html>
