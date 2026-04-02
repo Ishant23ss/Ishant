@@ -790,7 +790,8 @@ button {
 .lb-rank { font-size: 1.3rem; width: 32px; text-align: center; }
 .lb-avatar { width: 42px; height: 42px; flex-shrink: 0; }
 .lb-avatar-img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; }
-.lb-avatar-placeholder {
+.lb-avatar-placeholder,
+.lb-avatar-fallback {
   width: 42px; height: 42px; border-radius: 50%;
   background: linear-gradient(135deg, #2563eb, #7c3aed);
   display: flex; align-items: center; justify-content: center;
@@ -1123,8 +1124,10 @@ main {
   .lb-rank { font-size: 1.1rem; width: 26px; }
   .lb-avatar,
   .lb-avatar-img,
-  .lb-avatar-placeholder { width: 36px; height: 36px; }
-  .lb-avatar-placeholder { font-size: 14px; }
+  .lb-avatar-placeholder,
+  .lb-avatar-fallback { width: 36px; height: 36px; }
+  .lb-avatar-placeholder,
+  .lb-avatar-fallback { font-size: 14px; }
   .lb-name { font-size: 0.88rem; }
   .lb-points { font-size: 0.9rem; }
 

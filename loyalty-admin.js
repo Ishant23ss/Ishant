@@ -356,11 +356,10 @@ function renderCouponTable(coupons) {
 }
 
 // ─── Coupon Tabs ──────────────────────────────────────────────────────────────
-window.showTab = function (tab) {
+window.showTab = function (tab, clickedBtn) {
   currentTab = tab;
   document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
-  event.target.classList.add("active");
-  // Re-render using current snapshot — the onSnapshot will re-fire or we trigger manually
+  if (clickedBtn) clickedBtn.classList.add("active");
   subscribeCoupons();
 };
 
