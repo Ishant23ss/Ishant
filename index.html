@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>HIVE Club – Staff Login</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Login-specific styles */
+    .login-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .login-card {
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 50px 40px;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+    }
+    .login-logo {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .login-logo .hive-icon {
+      font-size: 56px;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .login-logo h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #60a5fa, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+    }
+    .login-logo p {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+    .login-form .form-group {
+      margin-bottom: 18px;
+    }
+    .login-form label {
+      display: block;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .login-form input {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      color: white;
+      font-size: 16px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-sizing: border-box;
+    }
+    .login-form input:focus {
+      outline: none;
+      border-color: #60a5fa;
+      box-shadow: 0 0 0 3px rgba(96,165,250,0.15);
+    }
+    .login-form input::placeholder {
+      color: rgba(255,255,255,0.3);
+    }
+    .btn-login {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      margin-top: 8px;
+      letter-spacing: 0.5px;
+    }
+    .btn-login:hover { opacity: 0.92; transform: translateY(-1px); }
+    .btn-login:active { transform: translateY(0); }
+    .btn-loyalty-access {
+      width: 100%;
+      padding: 14px;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.75);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 12px;
+    }
+    .btn-loyalty-access:hover { background: rgba(255,255,255,0.12); }
+    .error-msg {
+      display: none;
+      color: #f87171;
+      font-size: 13px;
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: rgba(248,113,113,0.12);
+      border-radius: 8px;
+      border: 1px solid rgba(248,113,113,0.25);
+    }
+    .divider {
+      text-align: center;
+      margin: 20px 0;
+      color: rgba(255,255,255,0.3);
+      font-size: 13px;
+      position: relative;
+    }
+    .divider::before, .divider::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 42%;
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+    }
+    .divider::before { left: 0; }
+    .divider::after { right: 0; }
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 36px 24px;
+        border-radius: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-wrapper">
+    <div class="login-card">
+      <div class="login-logo">
+        <span class="hive-icon">🐝</span>
+        <h1>HIVE Club</h1>
+        <p>Staff Portal</p>
+      </div>
+
+      <form class="login-form" id="loginForm" onsubmit="handleAdminLogin(event)">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Enter username" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter password" autocomplete="current-password" required>
+        </div>
+        <div class="error-msg" id="errorMessage"></div>
+        <button type="submit" class="btn-login">🔐 Sign In</button>
+      </form>
+
+      <div class="divider">or</div>
+      <button class="btn-loyalty-access" onclick="goToPublicLoyalty()">
+        🎯 Access Loyalty Program
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const ADMIN_CREDENTIALS = {
+      "hive4": "hive2026"
+    };
+
+    const SESSION_TIMEOUT = 8 * 60 * 60 * 1000; // 8 hours
+
+    window.addEventListener("load", function () {
+      const token = sessionStorage.getItem("adminToken");
+      if (token && isTokenValid(token)) {
+        window.location.href = "dashboard-select.html";
+      }
+    });
+
+    function handleAdminLogin(event) {
+      event.preventDefault();
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value;
+      const errorMsg = document.getElementById("errorMessage");
+
+      if (!username || !password) {
+        errorMsg.textContent = "❌ Please enter username and password";
+        errorMsg.style.display = "block";
+        return;
+      }
+
+      if (ADMIN_CREDENTIALS[username] === password) {
+        const token = generateToken(username);
+        sessionStorage.setItem("adminToken", token);
+        errorMsg.style.display = "none";
+        window.location.href = "dashboard-select.html";
+      } else {
+        errorMsg.textContent = "❌ Invalid username or password";
+        errorMsg.style.display = "block";
+        document.getElementById("password").value = "";
+        document.getElementById("password").focus();
+      }
+    }
+
+    function goToPublicLoyalty() {
+      sessionStorage.removeItem("adminToken");
+      window.location.href = "loyalty.html";
+    }
+
+    function generateToken(username) {
+      return btoa(username + ":" + Date.now());
+    }
+
+    function isTokenValid(token) {
+      try {
+        const data = atob(token);
+        const parts = data.split(":");
+        const timestamp = parseInt(parts[1]);
+        return (Date.now() - timestamp) < SESSION_TIMEOUT;
+      } catch (e) {
+        return false;
+      }
+    }
+  </script>
+</body>
+</html>

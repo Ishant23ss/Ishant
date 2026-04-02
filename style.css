@@ -1,18 +1,1160 @@
+/* ============================================================
+   HIVE Club – Global Styles
+   ============================================================ */
+
+/* ── Reset & Base ──────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(135deg, #0f0c29 0%, #1a1a3e 50%, #0f0c29 100%);
+  background-attachment: fixed;
+  color: #ffffff;
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Container ─────────────────────────────────────────────── */
 .container {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 40px 24px;
 }
 
-.header {
-  background: #f8f9fa;
-  padding: 20px;
+/* ── Typography ────────────────────────────────────────────── */
+h1 { font-size: 2.2rem; font-weight: 800; }
+h2 { font-size: 1.6rem; font-weight: 700; }
+h3 { font-size: 1.2rem; font-weight: 600; }
+h4 { font-size: 1rem;   font-weight: 600; }
+
+/* ── Loading text ──────────────────────────────────────────── */
+.loading-text {
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  padding: 24px;
+  font-size: 0.95rem;
+}
+
+/* ============================================================
+   HEADERS
+   ============================================================ */
+
+.admin-header,
+.loyalty-header {
+  background: rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.admin-header-inner,
+.loyalty-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.admin-header-left,
+.loyalty-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-header-left h1,
+.loyalty-header-brand h1 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-logout-sm,
+.btn-admin-login {
+  padding: 9px 18px;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.btn-logout-sm:hover,
+.btn-admin-login:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+/* ============================================================
+   SECTION CARDS
+   ============================================================ */
+
+.section-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 30px 28px;
+  margin-bottom: 28px;
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 22px;
+  color: #e2e8f0;
+}
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.section-title-row .section-title {
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   STATS DASHBOARD
+   ============================================================ */
+
+.stats-dashboard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.stat-card-dash {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 22px 18px;
   text-align: center;
 }
 
-.footer {
-  background: #343a40;
+.stat-icon { font-size: 28px; margin-bottom: 8px; }
+.stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+.stat-value { font-size: 2rem; font-weight: 800; color: #60a5fa; }
+
+/* ============================================================
+   FORMS & INPUTS
+   ============================================================ */
+
+.form-input,
+.form-select,
+.search-input {
+  padding: 13px 16px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
   color: white;
-  padding: 10px;
+  font-size: 15px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  min-height: 46px;
+}
+
+.form-input:focus,
+.form-select:focus,
+.search-input:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96,165,250,0.15);
+}
+
+.form-input::placeholder,
+.search-input::placeholder {
+  color: rgba(255,255,255,0.35);
+}
+
+.form-select option {
+  background: #1a1a3e;
+  color: white;
+}
+
+/* ── Add Player Form ────────────────────────────────────────── */
+.add-player-form {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.add-player-form .form-input {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* ── Search Box ─────────────────────────────────────────────── */
+.search-section {
+  margin-bottom: 28px;
+}
+
+.search-box {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.search-input {
+  flex: 1;
+}
+
+/* ── Buttons ────────────────────────────────────────────────── */
+button {
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.2s, transform 0.15s, background 0.2s;
+}
+
+.btn-add-player,
+.search-btn {
+  padding: 13px 24px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  min-height: 46px;
+}
+
+.btn-add-player:hover,
+.search-btn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   PLAYER CARDS – ADMIN
+   ============================================================ */
+
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.player-card-admin {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 18px;
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: border-color 0.2s;
+}
+
+.player-card-admin:hover {
+  border-color: rgba(96,165,250,0.3);
+}
+
+/* Top section with avatar + info */
+.player-card-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.admin-avatar-placeholder {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.player-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.player-card-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-card-pts {
+  font-size: 0.9rem;
+  color: #60a5fa;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.player-card-redeem {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.45);
+  margin-top: 1px;
+}
+
+/* Points form inside admin card */
+.points-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.points-form-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 100px;
+}
+
+.input-group label {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.hours-group {
+  max-width: 110px;
+}
+
+.form-input-sm {
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+  min-height: 40px;
+  width: 100%;
+}
+
+.form-input-sm:focus {
+  outline: none;
+  border-color: #60a5fa;
+}
+
+.form-select {
+  width: 100%;
+}
+
+.points-preview {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.4);
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 8px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+}
+
+.points-preview.active {
+  color: #86efac;
+  background: rgba(134,239,172,0.08);
+  border: 1px solid rgba(134,239,172,0.15);
+}
+
+.btn-add-pts {
+  padding: 11px 16px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  min-height: 42px;
+}
+
+.btn-add-pts:hover {
+  opacity: 0.88;
+}
+
+/* Delete button */
+.btn-delete-player {
+  padding: 9px 14px;
+  background: rgba(239,68,68,0.1);
+  color: #f87171;
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  width: 100%;
+  min-height: 38px;
+}
+
+.btn-delete-player:hover {
+  background: rgba(239,68,68,0.2);
+}
+
+/* ============================================================
+   PLAYER CARD – LOYALTY (public)
+   ============================================================ */
+
+.player-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 40px 32px;
+  max-width: 640px;
+  margin: 0 auto 28px;
   text-align: center;
+}
+
+/* ── Avatar ─────────────────────────────────────────────────── */
+.avatar-container {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 20px;
+}
+
+.progress-ring-svg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 160px;
+  height: 160px;
+  transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+  fill: none;
+  stroke: rgba(255,255,255,0.08);
+  stroke-width: 5;
+}
+
+.progress-ring-fill {
+  fill: none;
+  stroke: #ffd700;
+  stroke-width: 5;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s ease, stroke 0.4s;
+}
+
+.avatar-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 52px;
+  font-weight: 700;
+  border-radius: 50%;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.camera-btn {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 34px;
+  height: 34px;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+  z-index: 2;
+}
+
+.camera-btn:hover { background: rgba(255,255,255,0.25); }
+
+/* ── Player Info ─────────────────────────────────────────────── */
+.player-name { font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; }
+.player-points { font-size: 1rem; color: #60a5fa; font-weight: 600; margin-bottom: 6px; }
+.player-level { font-size: 0.9rem; font-weight: 700; margin-bottom: 16px; }
+
+/* Progress bar */
+.progress-bar-wrap {
+  background: rgba(255,255,255,0.1);
+  border-radius: 99px;
+  height: 8px;
+  margin: 0 0 8px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 99px;
+  background: #ffd700;
+  transition: width 0.6s ease;
+}
+
+.progress-label {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 28px;
+}
+
+/* Sub-section titles */
+.sub-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #e2e8f0;
+  text-align: left;
+}
+
+/* ── Rewards Grid ───────────────────────────────────────────── */
+.rewards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.reward-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 18px 14px;
+  text-align: center;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.reward-card:hover { transform: translateY(-2px); }
+
+.reward-locked {
+  opacity: 0.55;
+}
+
+.reward-icon { font-size: 30px; margin-bottom: 8px; }
+.reward-name { font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; }
+.reward-desc { font-size: 0.72rem; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+.reward-cost { font-size: 0.8rem; color: #fbbf24; font-weight: 700; margin-bottom: 10px; }
+
+.btn-claim {
+  width: 100%;
+  padding: 9px 8px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  min-height: 36px;
+}
+
+.btn-claim-locked {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.4);
+  cursor: not-allowed;
+}
+
+/* ── My Coupons ──────────────────────────────────────────────── */
+.redeem-section,
+.my-coupons-section {
+  text-align: left;
+}
+
+.coupon-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.coupon-item-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.coupon-item-left strong {
+  font-size: 0.9rem;
+  color: #e2e8f0;
+}
+
+.coupon-date {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.4);
+}
+
+.coupon-item-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.coupon-cost {
+  font-size: 0.8rem;
+  color: #f87171;
+  font-weight: 600;
+}
+
+/* ============================================================
+   BADGES & STATUS
+   ============================================================ */
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.badge-pending  { background: rgba(251,191,36,0.15);  color: #fbbf24;  border: 1px solid rgba(251,191,36,0.3);  }
+.badge-approved { background: rgba(74,222,128,0.15);  color: #4ade80;  border: 1px solid rgba(74,222,128,0.3);  }
+.badge-used     { background: rgba(96,165,250,0.15);  color: #60a5fa;  border: 1px solid rgba(96,165,250,0.3);  }
+.badge-rejected { background: rgba(248,113,113,0.15); color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
+
+/* ============================================================
+   COUPON TABLE (admin)
+   ============================================================ */
+
+.coupon-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s;
+  min-height: 40px;
+}
+
+.tab-btn.active,
+.tab-btn:hover {
+  background: rgba(96,165,250,0.15);
+  color: #60a5fa;
+  border-color: rgba(96,165,250,0.3);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 12px;
+}
+
+.coupon-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.coupon-table th {
+  padding: 12px 16px;
+  text-align: left;
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.6);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+}
+
+.coupon-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: #e2e8f0;
+  vertical-align: middle;
+}
+
+.coupon-table tr:last-child td { border-bottom: none; }
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.btn-approve,
+.btn-reject {
+  padding: 7px 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  min-height: 34px;
+  white-space: nowrap;
+}
+
+.btn-approve {
+  background: rgba(74,222,128,0.15);
+  color: #4ade80;
+  border: 1px solid rgba(74,222,128,0.3);
+}
+
+.btn-reject {
+  background: rgba(248,113,113,0.15);
+  color: #f87171;
+  border: 1px solid rgba(248,113,113,0.3);
+}
+
+.btn-approve:hover { background: rgba(74,222,128,0.25); }
+.btn-reject:hover  { background: rgba(248,113,113,0.25); }
+
+/* ============================================================
+   LEADERBOARD
+   ============================================================ */
+
+.leaderboard-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  margin-bottom: 10px;
+  transition: background 0.2s;
+}
+
+.leaderboard-top {
+  background: rgba(255,215,0,0.05);
+  border-color: rgba(255,215,0,0.15);
+}
+
+.lb-rank { font-size: 1.3rem; width: 32px; text-align: center; }
+.lb-avatar { width: 42px; height: 42px; flex-shrink: 0; }
+.lb-avatar-img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; }
+.lb-avatar-placeholder {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 700;
+}
+.lb-info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.lb-name { font-weight: 700; font-size: 0.95rem; }
+.lb-level { font-size: 0.75rem; font-weight: 600; }
+.lb-points { font-size: 1rem; font-weight: 800; color: #60a5fa; white-space: nowrap; }
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: rgba(26,26,62,0.97);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 22px;
+  padding: 36px 30px;
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-content h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.modal-content p {
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.modal-btns {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.btn-confirm {
+  flex: 1;
+  padding: 13px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  min-height: 46px;
+}
+
+.btn-cancel {
+  flex: 1;
+  padding: 13px;
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  font-size: 15px;
+  min-height: 46px;
+}
+
+.btn-confirm:hover { opacity: 0.9; }
+.btn-cancel:hover  { background: rgba(255,255,255,0.12); }
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  max-width: 340px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast-success {
+  background: rgba(16,185,129,0.95);
+  color: white;
+}
+
+.toast-error {
+  background: rgba(239,68,68,0.95);
+  color: white;
+}
+
+/* ============================================================
+   DASHBOARD (dashboard.html)
+   ============================================================ */
+
+header {
+  background: rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+header h1 {
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 1.6rem;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-bar {
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+  min-height: 40px;
+}
+
+.export-button {
+  padding: 10px 20px;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  font-size: 14px;
+  min-height: 40px;
+}
+
+.export-button:hover { background: rgba(255,255,255,0.15); }
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  color: rgba(255,255,255,0.8);
+}
+
+/* ============================================================
+   MOBILE RESPONSIVENESS
+   ============================================================ */
+
+/* ─── Tablets (768px – 1024px) ─── */
+@media (max-width: 1024px) {
+  .container { padding: 30px 20px; }
+  .stats-dashboard { grid-template-columns: repeat(2, 1fr); }
+  .players-grid { grid-template-columns: repeat(2, 1fr); }
+  .rewards-grid { grid-template-columns: repeat(2, 1fr); }
+  .hours-group { max-width: 100%; }
+}
+
+/* ─── Small tablets & large phones (480px – 768px) ─── */
+@media (max-width: 768px) {
+  .container { padding: 24px 16px; }
+
+  .admin-header-inner,
+  .loyalty-header-inner { padding: 12px 16px; }
+
+  .admin-header-left h1,
+  .loyalty-header-brand h1 { font-size: 1.1rem; }
+
+  .section-card { padding: 22px 18px; }
+
+  .stats-dashboard { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .stat-value { font-size: 1.6rem; }
+
+  .players-grid { grid-template-columns: 1fr; }
+  .rewards-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .section-title-row { flex-direction: column; align-items: flex-start; }
+  .section-title-row .search-box { width: 100%; }
+  .search-input { min-width: 0; width: 100%; }
+
+  .player-card { padding: 28px 20px; }
+
+  .avatar-container { width: 140px; height: 140px; }
+  .progress-ring-svg { width: 140px; height: 140px; }
+  .avatar-inner { width: 112px; height: 112px; }
+  .avatar-placeholder { font-size: 42px; }
+  .player-name { font-size: 1.5rem; }
+
+  .coupon-tabs { gap: 8px; }
+  .tab-btn { padding: 9px 14px; font-size: 12px; }
+
+  .action-buttons { flex-direction: column; gap: 6px; }
+  .btn-approve, .btn-reject { width: 100%; }
+
+  .modal-btns { flex-direction: column; }
+}
+
+/* ─── Phones (≤ 480px) ─── */
+@media (max-width: 480px) {
+  body { background-attachment: scroll; }
+  .container { padding: 20px 14px; }
+
+  .admin-header-inner,
+  .loyalty-header-inner { padding: 10px 14px; flex-wrap: wrap; gap: 10px; }
+
+  .admin-header-left h1,
+  .loyalty-header-brand h1 { font-size: 1rem; }
+
+  /* Stats */
+  .stats-dashboard { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .stat-card-dash { padding: 16px 12px; }
+  .stat-icon { font-size: 22px; }
+  .stat-label { font-size: 0.68rem; }
+  .stat-value { font-size: 1.4rem; }
+
+  /* Forms */
+  .add-player-form { flex-direction: column; }
+  .add-player-form .form-input { min-width: 0; }
+  .btn-add-player { width: 100%; }
+
+  .search-box { flex-direction: column; gap: 10px; }
+  .search-btn { width: 100%; min-height: 48px; font-size: 16px; }
+
+  /* Prevent iOS zoom on focus */
+  .form-input,
+  .form-select,
+  .search-input,
+  .form-input-sm { font-size: 16px; min-height: 48px; }
+
+  /* Section cards */
+  .section-card { padding: 18px 14px; }
+  .section-title { font-size: 1.1rem; }
+
+  /* Player cards admin */
+  .players-grid { grid-template-columns: 1fr; gap: 14px; }
+  .player-card-admin { padding: 18px 14px; }
+  .points-form-row { flex-direction: column; }
+  .hours-group { max-width: 100%; }
+  .input-group { min-width: 0; }
+  .btn-add-pts { min-height: 46px; font-size: 15px; }
+  .btn-delete-player { min-height: 42px; }
+
+  /* Loyalty player card */
+  .player-card { padding: 24px 16px; }
+  .avatar-container { width: 120px; height: 120px; }
+  .progress-ring-svg { width: 120px; height: 120px; }
+  .avatar-inner { width: 96px; height: 96px; }
+  .avatar-placeholder { font-size: 36px; }
+  .player-name { font-size: 1.3rem; }
+  .player-points { font-size: 0.9rem; }
+
+  /* Rewards */
+  .rewards-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .reward-card { padding: 14px 10px; }
+  .reward-icon { font-size: 24px; }
+  .reward-name { font-size: 0.78rem; }
+  .reward-cost { font-size: 0.72rem; }
+  .btn-claim { font-size: 11px; padding: 7px 4px; }
+
+  /* Coupon item */
+  .coupon-item { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .coupon-item-right { flex-direction: row; align-items: center; gap: 10px; }
+
+  /* Coupon table: card-style on mobile */
+  .coupon-table thead { display: none; }
+  .coupon-table tbody,
+  .coupon-table tr,
+  .coupon-table td { display: block; width: 100%; }
+  .coupon-table tr {
+    margin-bottom: 14px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.04);
+  }
+  .coupon-table td {
+    padding: 7px 0;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+  }
+  .coupon-table td:last-child { border-bottom: none; }
+  .coupon-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    margin-right: 10px;
+  }
+  .action-buttons { flex-direction: row; flex-wrap: wrap; width: 100%; }
+  .btn-approve, .btn-reject { flex: 1; min-width: 80px; }
+
+  /* Leaderboard */
+  .leaderboard-row { padding: 12px 14px; gap: 10px; }
+  .lb-rank { font-size: 1.1rem; width: 26px; }
+  .lb-avatar,
+  .lb-avatar-img,
+  .lb-avatar-placeholder { width: 36px; height: 36px; }
+  .lb-avatar-placeholder { font-size: 14px; }
+  .lb-name { font-size: 0.88rem; }
+  .lb-points { font-size: 0.9rem; }
+
+  /* Modal */
+  .modal-content { padding: 26px 20px; border-radius: 18px; }
+  .modal-btns { flex-direction: column; }
+  .btn-confirm, .btn-cancel { min-height: 50px; font-size: 16px; }
+
+  /* Tabs */
+  .coupon-tabs { gap: 8px; }
+  .tab-btn { padding: 10px 12px; font-size: 11px; flex: 1; text-align: center; }
+
+  /* Toast */
+  .toast {
+    bottom: 16px;
+    right: 12px;
+    left: 12px;
+    max-width: none;
+    font-size: 13px;
+    text-align: center;
+  }
+
+  /* Touch targets */
+  button { min-height: 44px; }
+}
+
+/* ─── Very small phones (≤ 360px) ─── */
+@media (max-width: 360px) {
+  .rewards-grid { grid-template-columns: 1fr; }
+  .stats-dashboard { grid-template-columns: 1fr 1fr; }
+  .player-name { font-size: 1.2rem; }
+  .section-title { font-size: 1rem; }
 }

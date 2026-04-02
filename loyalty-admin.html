@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>HIVE Loyalty – Admin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="admin-header">
+  <div class="admin-header-inner">
+    <div class="admin-header-left">
+      <span style="font-size:28px;">🐝</span>
+      <h1>Loyalty Admin</h1>
+    </div>
+    <div class="admin-header-right">
+      <button class="btn-logout-sm" onclick="window.location.href='dashboard-select.html'">← Back</button>
+    </div>
+  </div>
+</header>
+
+<!-- Stats Dashboard -->
+<div class="container">
+  <div class="stats-dashboard" id="statsDashboard">
+    <div class="stat-card-dash">
+      <div class="stat-icon">👥</div>
+      <div class="stat-label">Total Players</div>
+      <div class="stat-value" id="statPlayers">–</div>
+    </div>
+    <div class="stat-card-dash">
+      <div class="stat-icon">⭐</div>
+      <div class="stat-label">Points Issued</div>
+      <div class="stat-value" id="statPoints">–</div>
+    </div>
+    <div class="stat-card-dash">
+      <div class="stat-icon">🎫</div>
+      <div class="stat-label">Pending Coupons</div>
+      <div class="stat-value" id="statPending">–</div>
+    </div>
+    <div class="stat-card-dash">
+      <div class="stat-icon">✅</div>
+      <div class="stat-label">Approved Today</div>
+      <div class="stat-value" id="statApproved">–</div>
+    </div>
+  </div>
+
+  <!-- Add Player -->
+  <section class="section-card">
+    <h2 class="section-title">➕ Add New Player</h2>
+    <div class="add-player-form">
+      <input type="text" id="newPlayerName" class="form-input" placeholder="Player name…">
+      <button class="btn-add-player" onclick="addNewPlayer()">Add Player</button>
+    </div>
+  </section>
+
+  <!-- Search & Players -->
+  <section class="section-card">
+    <div class="section-title-row">
+      <h2 class="section-title">🏅 Players</h2>
+      <div class="search-box">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search players…" oninput="filterPlayers(this.value)">
+      </div>
+    </div>
+    <div class="players-grid" id="playersGrid">
+      <div class="loading-text">Loading players…</div>
+    </div>
+  </section>
+
+  <!-- Coupon Requests -->
+  <section class="section-card">
+    <h2 class="section-title">🎫 Coupon Requests</h2>
+    <div class="coupon-tabs">
+      <button class="tab-btn active" onclick="showTab('pending')">⏳ Pending</button>
+      <button class="tab-btn" onclick="showTab('approved')">✅ Approved</button>
+      <button class="tab-btn" onclick="showTab('used')">🎯 Used</button>
+    </div>
+    <div class="table-wrapper">
+      <table class="coupon-table" id="couponTable">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Coupon</th>
+            <th>Points</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="couponTableBody">
+          <tr><td colspan="6" style="text-align:center; color:rgba(255,255,255,.4);">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Firebase & App JS -->
+<script type="module" src="loyalty-admin.js"></script>
+</body>
+</html>
