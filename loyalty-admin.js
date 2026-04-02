@@ -61,11 +61,11 @@ function refreshStats() {
 }
 
 // ─── Tab Navigation ────────────────────────────────────────────────────────────
-function switchTab(tabId) {
+function switchTab(tabId, btn) {
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('tab-' + tabId).classList.add('active');
-    event.currentTarget.classList.add('active');
+    if (btn) btn.classList.add('active');
 
     if (tabId === 'players') renderPlayers();
     if (tabId === 'coupons') renderCoupons();
@@ -95,19 +95,19 @@ function renderPlayers(filter) {
     noMsg.style.display = 'none';
     grid.innerHTML = players.map(p => `
         <div class="player-card">
-            <div class="player-avatar">${getInitials(p.name)}</div>
+            <div class="player-avatar">${escapeHtml(getInitials(p.name))}</div>
             <div class="player-info">
                 <div class="player-name">${escapeHtml(p.name)}</div>
                 <div class="player-phone">${escapeHtml(p.phone)}</div>
-                <div class="player-membership badge badge-${p.membership}">${formatMembership(p.membership)}</div>
+                <div class="player-membership badge badge-${escapeHtml(p.membership)}">${escapeHtml(formatMembership(p.membership))}</div>
             </div>
             <div class="player-points">
                 <div class="points-value">${(p.points || 0).toLocaleString()}</div>
                 <div class="points-label">points</div>
             </div>
             <div class="player-actions">
-                <button class="btn btn-sm btn-primary" onclick="openAddPointsModal('${p.id}')">+ Points</button>
-                <button class="btn btn-sm btn-outline" onclick="openPlayerDetail('${p.id}')">View</button>
+                <button class="btn btn-sm btn-primary" onclick="openAddPointsModal('${escapeHtml(p.id)}')">+ Points</button>
+                <button class="btn btn-sm btn-outline" onclick="openPlayerDetail('${escapeHtml(p.id)}')">View</button>
             </div>
         </div>
     `).join('');
@@ -160,8 +160,9 @@ function switchTabByName(tabId) {
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('tab-' + tabId).classList.add('active');
-    const btns = document.querySelectorAll('.tab-btn');
-    btns.forEach(b => { if (b.textContent.trim().toLowerCase() === tabId) b.classList.add('active'); });
+    // Activate the button whose data-tab attribute matches
+    const btn = document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
+    if (btn) btn.classList.add('active');
     renderPlayers();
 }
 
@@ -274,22 +275,22 @@ function openPlayerDetail(cardId) {
 
     const historyRows = history.length ? history.map(h => `
         <tr>
-            <td>${formatDate(h.date)}</td>
-            <td>${formatActivity(h.activity)}</td>
-            <td>${h.hours != null ? h.hours + ' hr' : '—'}</td>
-            <td>+${h.earnedPoints}</td>
+            <td>${escapeHtml(formatDate(h.date))}</td>
+            <td>${escapeHtml(formatActivity(h.activity))}</td>
+            <td>${h.hours != null ? escapeHtml(String(h.hours)) + ' hr' : '—'}</td>
+            <td>+${Number(h.earnedPoints) || 0}</td>
             <td>${escapeHtml(h.note || '')}</td>
         </tr>
     `).join('') : '<tr><td colspan="5" class="empty-cell">No activity yet</td></tr>';
 
     document.getElementById('playerDetailBody').innerHTML = `
         <div class="detail-header">
-            <div class="detail-avatar">${getInitials(player.name)}</div>
+            <div class="detail-avatar">${escapeHtml(getInitials(player.name))}</div>
             <div class="detail-meta">
                 <h2>${escapeHtml(player.name)}</h2>
                 <p>${escapeHtml(player.phone)}</p>
                 ${player.email ? `<p>${escapeHtml(player.email)}</p>` : ''}
-                <span class="badge badge-${player.membership}">${formatMembership(player.membership)}</span>
+                <span class="badge badge-${escapeHtml(player.membership)}">${escapeHtml(formatMembership(player.membership))}</span>
             </div>
             <div class="detail-points">
                 <div class="big-points">${(player.points || 0).toLocaleString()}</div>

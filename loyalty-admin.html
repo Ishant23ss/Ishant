@@ -46,9 +46,9 @@
 
         <!-- Tab Navigation -->
         <nav class="tab-nav">
-            <button class="tab-btn active" onclick="switchTab('players')">Players</button>
-            <button class="tab-btn" onclick="switchTab('add-player')">Add Player</button>
-            <button class="tab-btn" onclick="switchTab('coupons')">Coupons</button>
+            <button class="tab-btn active" data-tab="players" onclick="switchTab('players', this)">Players</button>
+            <button class="tab-btn" data-tab="add-player" onclick="switchTab('add-player', this)">Add Player</button>
+            <button class="tab-btn" data-tab="coupons" onclick="switchTab('coupons', this)">Coupons</button>
         </nav>
 
         <!-- Players Tab -->
