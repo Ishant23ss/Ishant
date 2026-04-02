@@ -99,15 +99,15 @@ function renderPlayers(filter) {
             <div class="player-info">
                 <div class="player-name">${escapeHtml(p.name)}</div>
                 <div class="player-phone">${escapeHtml(p.phone)}</div>
-                <div class="player-membership badge badge-${escapeHtml(p.membership)}">${escapeHtml(formatMembership(p.membership))}</div>
+                <div class="player-membership badge badge-${p.membership}">${escapeHtml(formatMembership(p.membership))}</div>
             </div>
             <div class="player-points">
                 <div class="points-value">${(p.points || 0).toLocaleString()}</div>
                 <div class="points-label">points</div>
             </div>
             <div class="player-actions">
-                <button class="btn btn-sm btn-primary" onclick="openAddPointsModal('${escapeHtml(p.id)}')">+ Points</button>
-                <button class="btn btn-sm btn-outline" onclick="openPlayerDetail('${escapeHtml(p.id)}')">View</button>
+                <button class="btn btn-sm btn-primary" onclick="openAddPointsModal(${JSON.stringify(p.id)})">+ Points</button>
+                <button class="btn btn-sm btn-outline" onclick="openPlayerDetail(${JSON.stringify(p.id)})">View</button>
             </div>
         </div>
     `).join('');
@@ -277,7 +277,7 @@ function openPlayerDetail(cardId) {
         <tr>
             <td>${escapeHtml(formatDate(h.date))}</td>
             <td>${escapeHtml(formatActivity(h.activity))}</td>
-            <td>${h.hours != null ? escapeHtml(String(h.hours)) + ' hr' : '—'}</td>
+            <td>${h.hours != null ? escapeHtml(String(h.hours) + ' hr') : '—'}</td>
             <td>+${Number(h.earnedPoints) || 0}</td>
             <td>${escapeHtml(h.note || '')}</td>
         </tr>
@@ -290,7 +290,7 @@ function openPlayerDetail(cardId) {
                 <h2>${escapeHtml(player.name)}</h2>
                 <p>${escapeHtml(player.phone)}</p>
                 ${player.email ? `<p>${escapeHtml(player.email)}</p>` : ''}
-                <span class="badge badge-${escapeHtml(player.membership)}">${escapeHtml(formatMembership(player.membership))}</span>
+                <span class="badge badge-${player.membership}">${escapeHtml(formatMembership(player.membership))}</span>
             </div>
             <div class="detail-points">
                 <div class="big-points">${(player.points || 0).toLocaleString()}</div>
@@ -328,7 +328,7 @@ function renderCoupons() {
         <tr>
             <td><strong>${escapeHtml(c.code)}</strong></td>
             <td>${escapeHtml(c.description)}</td>
-            <td>${c.pointsRequired}</td>
+            <td>${Number(c.pointsRequired) || 0}</td>
             <td><span class="badge badge-${c.active ? 'member' : 'non-member'}">${c.active ? 'Active' : 'Inactive'}</span></td>
             <td>
                 <button class="btn btn-sm btn-outline" onclick="toggleCoupon(${i})">${c.active ? 'Deactivate' : 'Activate'}</button>
